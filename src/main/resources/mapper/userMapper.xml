@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.heycolor.yunziyuanbackend.mapper.userMapper">
+    <select id="selectUserID" resultType="com.heycolor.yunziyuanbackend.DAOuser.userBean" >SELECT *FROM myuser</select>
+    <insert id="userReg">
+        INSERT INTO myuser
+        (user_number,
+         user_psw,
+         user_name,
+         user_tx,
+         user_state,
+         user_aihao,
+         user_points,
+         user_login_key,
+         user_login_time
+        )
+        VALUES
+            (#{user_number},
+             #{user_psw},
+             #{user_name},
+             #{user_tx},
+             #{user_state},
+             #{user_aihao},
+             #{user_points},
+             #{user_login_key},
+             #{user_login_time}
+            )
+    </insert>
+
+    <select id="userLogin" resultType="com.heycolor.yunziyuanbackend.DAOuser.userBean" >
+        SELECT * FROM myuser WHERE user_number = #{user_number} And user_psw = #{user_psw}
+    </select>
+
+
+
+    <select id="userTest" resultType="boolean" >
+        SELECT COUNT(*) > 0 FROM myuser WHERE user_number = #{user_number}
+    </select>
+
+    <update id="upLongDate" >
+        UPDATE myuser SET user_login_key = #{user_login_key}, user_login_time = #{user_login_time} WHERE id = #{id}
+    </update>
+
+    <update id="upUserInfo" >
+        UPDATE myuser
+        <set>
+            <if test="user_name != null">
+                user_name = #{user_name},
+            </if>
+            <if test="user_tx != null">
+                user_tx = #{user_tx},
+            </if>
+            <if test="user_aihao != null">
+                user_aihao = #{user_aihao}
+            </if>
+        </set>
+        WHERE user_number = #{user_number}
+    </update>
+
+    <select id="userLoginKeyTest" resultType="boolean" >
+        SELECT COUNT(*) > 0 FROM myuser WHERE user_number = #{user_number} AND user_login_key = #{user_login_key}
+    </select>
+
+</mapper>

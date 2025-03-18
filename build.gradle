@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.3'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.heycolor'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+// 配置jar包的任务
+jar {
+    // 设置生成的jar文件名（可选）
+    archiveBaseName.set('myproject.jar')
+    // 设置生成的jar版本号（可选）
+    archiveVersion.set('1.0')
+    // 可以设置更多的jar配置，例如manifest文件等
+    manifest {
+        attributes(
+                'Main-Class': 'com.heycolor.YunziyuanBackEndApplication' // 指定主类，这是运行时的入口点
+        )
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation 'com.alibaba:fastjson:2.0.23'
+}
+
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
