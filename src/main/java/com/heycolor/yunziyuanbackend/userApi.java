@@ -69,7 +69,7 @@ public class userApi {
     }
 
     @PostMapping({"/upInfo"})
-    private ResponseEntity<ReturnInfo> userToReg(@Validated @RequestBody upInfoParams bao) {
+    private ResponseEntity<ReturnInfo> userInfoToUpDate(@Validated @RequestBody upInfoParams bao) {
         boolean uTest = xUser.userByLoginTest(bao.getUser_number(),bao.getUser_login_key());
         if (!uTest) {
             return ResponseEntity.badRequest()
