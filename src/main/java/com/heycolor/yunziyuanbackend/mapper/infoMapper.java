@@ -19,7 +19,7 @@ public interface infoMapper {
     int infoLikeDel(String user_number,int data_id);
     boolean infoLikeGet(String user_number,int data_id);
 
-    //用户评价和获取
+    //用户评价和获取地
     int infoPingfenAdd(String user_number,int data_id,int count_score);
     List<pingfenBean> infoPingfenGet(String user_number, int data_id);
 
