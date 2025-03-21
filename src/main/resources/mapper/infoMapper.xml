@@ -35,4 +35,105 @@
              #{gmt_create}
             )
     </insert>
+
+    <insert id="infoLikeAdd">
+        INSERT INTO user_like
+        (user_number,
+         data_id
+        )
+        VALUES
+            (#{user_number},
+             #{data_id}
+            )
+    </insert>
+    <delete id="infoLikeDel">
+        DELETE FROM user_like
+        WHERE user_number = #{user_number}
+          AND data_id = #{data_id}
+    </delete>
+
+    <select id="infoLikeGet" resultType="boolean">
+        SELECT IF(COUNT(*) > 0, true, false)
+        FROM user_like
+        WHERE user_number = #{user_number}
+          AND data_id = #{data_id}
+    </select>
+
+    <insert id="infoPingfenAdd">
+        INSERT INTO user_pingfen
+        (user_number,
+         data_id,
+         count_score
+        )
+        VALUES
+            (#{user_number},
+             #{data_id},
+             #{count_score}
+            )
+    </insert>
+
+    <select id="infoPingfenGet" resultType="com.heycolor.yunziyuanbackend.DAOinfo.pingfenBean">
+        SELECT * FROM user_pingfen
+        WHERE user_number = #{user_number}
+          AND data_id = #{data_id}
+    </select>
+
+    <insert id="infoCollectionAdd">
+        INSERT INTO user_collection
+        (user_number,
+         data_id,
+         data_title,
+         data_img_list
+        )
+        VALUES
+            (#{user_number},
+             #{data_id},
+             #{data_title},
+             #{data_img_list}
+            )
+    </insert>
+    <delete id="infoCollectionDel">
+        DELETE FROM user_collection
+        WHERE user_number = #{user_number}
+          AND data_id = #{data_id}
+    </delete>
+    <select id="infoCollectionGet" resultType="boolean">
+        SELECT IF(COUNT(*) > 0, true, false)
+        FROM user_collection
+        WHERE user_number = #{user_number}
+          AND data_id = #{data_id}
+    </select>
+
+    <select id="infoCollectionGetAll" resultType="com.heycolor.yunziyuanbackend.DAOinfo.collectionBean">
+        SELECT * FROM user_collection
+        WHERE user_number = #{user_number}
+    </select>
+
+
+    <insert id="infoCommentAdd">
+        INSERT INTO user_comment
+        (user_number,
+         data_id,
+         comment,
+         create_time
+        )
+        VALUES
+            (#{user_number},
+             #{data_id},
+             #{comment},
+             #{create_time}
+            )
+    </insert>
+    <select id="infoCommentGetAll" resultType="com.heycolor.yunziyuanbackend.DAOinfo.commentBean">
+        SELECT * FROM user_comment
+        WHERE data_id = #{data_id}
+    </select>
+
+
+    <delete id="infoCommentDel">
+        DELETE FROM user_comment
+        WHERE id = #{id}
+          AND user_number = #{user_number}
+    </delete>
+
 </mapper>

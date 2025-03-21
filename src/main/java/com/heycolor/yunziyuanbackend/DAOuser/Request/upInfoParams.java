@@ -3,14 +3,13 @@ package com.heycolor.yunziyuanbackend.DAOuser.Request;
 public class upInfoParams {
     private final String user_number;
     private final String user_login_key;
-
-    private final String tpye;
+    private final String type;
     private final String value;
 
-    public upInfoParams(String userNumber, String userLoginKey, String tpye, String value) {
+    public upInfoParams(String userNumber, String userLoginKey, String type, String value) {
         this.user_number = userNumber;
         this.user_login_key = userLoginKey;
-        this.tpye = tpye;
+        this.type = type;
         this.value = value;
     }
 
@@ -22,8 +21,8 @@ public class upInfoParams {
         return user_login_key;
     }
 
-    public String getTpye() {
-        return tpye;
+    public String getType() {
+        return type;
     }
 
     public String getValue() {
