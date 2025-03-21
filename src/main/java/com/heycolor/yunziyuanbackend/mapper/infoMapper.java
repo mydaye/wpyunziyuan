@@ -1,11 +1,8 @@
 package com.heycolor.yunziyuanbackend.mapper;
 
 import com.heycolor.yunziyuanbackend.DAOinfo.*;
-import com.heycolor.yunziyuanbackend.DAOinfo.Request.addLike;
-import com.heycolor.yunziyuanbackend.DAOinfo.Request.addParams;
 import org.apache.ibatis.annotations.Mapper;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
 
