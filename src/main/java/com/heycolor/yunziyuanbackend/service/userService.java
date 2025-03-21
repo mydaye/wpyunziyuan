@@ -24,7 +24,10 @@ public class userService {
 
     //用户登陆检测
     public boolean userByLoginTest(String user_number, String user_login_key) {
-        return this.usermapper.userLoginKeyTest(user_number, user_login_key);
+        if (user_login_key !=null && !user_login_key.isEmpty()) {
+            return this.usermapper.userLoginKeyTest(user_number, user_login_key);
+        }
+        return false;
     }
 
     public void userByReg(String user_number, String user_psw, String user_name, String user_tx, int user_state, String user_aihao, int user_points, String user_login_key, Date user_login_time) {

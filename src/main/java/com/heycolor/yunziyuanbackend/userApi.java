@@ -48,7 +48,7 @@ public class userApi {
 
         // 更新登陆时间
         Date login_time = new Date();
-        xUser.upLoginTimer(dbData.getUser_id(), user_login_key, login_time);
+        xUser.upLoginTimer(dbData.getId(), user_login_key, login_time);
 
         return ResponseEntity.ok()
                 .body(ReturnInfo.res(SUCCESS, "", userInfo));
@@ -75,8 +75,8 @@ public class userApi {
             return ResponseEntity.badRequest()
                     .body(ReturnInfo.res(KEY_ERROR, "请重新登陆", null));
         }
-        if (bao.getValue() != null) {
-            int iReturn = switch (bao.getTpye()) {
+        if (bao.getValue() != null && bao.getType() != null) {
+            int iReturn = switch (bao.getType()) {
                 case "user_name" -> xUser.upUserInfo(bao.getUser_number(), null, bao.getValue(), null, null);
                 case "user_tx" -> xUser.upUserInfo(bao.getUser_number(), null, null, bao.getValue(), null);
                 case "user_aihao" -> xUser.upUserInfo(bao.getUser_number(), null, null, null, bao.getValue());
