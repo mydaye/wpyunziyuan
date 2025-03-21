@@ -11,7 +11,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public ResponseEntity<String> handleMaxUploadSizeExceeded(MaxUploadSizeExceededException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("文件大小超过限制！");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("文件大小超过限制！"+ex.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
