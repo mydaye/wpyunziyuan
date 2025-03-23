@@ -126,12 +126,14 @@
     <insert id="infoCommentAdd">
         INSERT INTO user_comment
         (user_number,
+         user_tx,
          data_id,
          comment,
          create_time
         )
         VALUES
             (#{user_number},
+             #{user_tx},
              #{data_id},
              #{comment},
              #{create_time}
