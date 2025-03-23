@@ -56,11 +56,24 @@ public class infoApI {
         }
         if (dbData > 0) {
             return ResponseEntity.ok()
-                    .body(ReturnInfo.res(SUCCESS, "", null));
+                    .body(ReturnInfo.res(SUCCESS, "", "OK"));
         }
 
         return ResponseEntity.ok()
                 .body(ReturnInfo.res(NOT_LOGGED_IN, "没有记录执行", null));
+
+    }
+    //用户点赞数量获取
+    @PostMapping({"/user/like/countGet"})
+    private ResponseEntity<ReturnInfo> userLikeCountGet(@Validated @RequestBody addLike bao) {
+        boolean uTest = xUser.userByLoginTest(bao.getUser_number(),bao.getUser_login_key());
+        if (!uTest) {
+            return ResponseEntity.badRequest()
+                    .body(ReturnInfo.res(KEY_ERROR, "请重新登陆", null));
+        }
+        int count = xInfo.infoLikeCount(bao);
+        return ResponseEntity.ok()
+                .body(ReturnInfo.res(SUCCESS, "", count));
 
     }
     //用户评分操作
@@ -73,20 +86,22 @@ public class infoApI {
         }
         if (bao.getType().equals("add")) {
             int dbData = xInfo.infoPingfenAdd(bao);
-            if (dbData>0) {
+            if (dbData > 0) {
                 return ResponseEntity.ok()
                         .body(ReturnInfo.res(SUCCESS, "", null));
             }
         } else if (bao.getType().equals("get")) {
             List<pingfenBean> rData = xInfo.infoPingfenGet(bao);
-            if (!rData.isEmpty()) {
-                pingfenBean bean = rData.getFirst();
+            if (rData.isEmpty()) {
                 return ResponseEntity.ok()
-                        .body(ReturnInfo.res(SUCCESS, "", bean));
+                        .body(ReturnInfo.res(SUCCESS, "", null));
             }
+            pingfenBean bean = rData.getFirst();
+            return ResponseEntity.ok()
+                    .body(ReturnInfo.res(SUCCESS, "", bean));
         }
         return ResponseEntity.ok()
-                .body(ReturnInfo.res(NOT_LOGGED_IN, "没有记录执行", null));
+                .body(ReturnInfo.res(SUCCESS, "没有记录执行", null));
 
     }
 

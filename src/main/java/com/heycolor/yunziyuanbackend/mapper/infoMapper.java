@@ -13,10 +13,13 @@ public interface infoMapper {
 
     //用户点赞操作
     int infoLikeAdd(String user_number,int data_id);
+    int infoLikeCount(int data_id);
     int infoLikeDel(String user_number,int data_id);
     boolean infoLikeGet(String user_number,int data_id);
 
     //用户评价和获取
+
+    int infoPingfenDataAdd(int data_id, int count_score);
     int infoPingfenAdd(String user_number,int data_id,int count_score);
     List<pingfenBean> infoPingfenGet(String user_number, int data_id);
 

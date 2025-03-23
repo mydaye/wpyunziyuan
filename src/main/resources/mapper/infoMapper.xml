@@ -59,6 +59,11 @@
           AND data_id = #{data_id}
     </select>
 
+    <select id="infoLikeCount" resultType="int">
+        SELECT COUNT(*) FROM user_like
+        WHERE data_id = #{data_id}
+    </select>
+
     <insert id="infoPingfenAdd">
         INSERT INTO user_pingfen
         (user_number,
@@ -71,6 +76,14 @@
              #{count_score}
             )
     </insert>
+    <update id="infoPingfenDataAdd" >
+        UPDATE mydata
+        SET
+            count_people = count_people + 1,
+            count_score = count_score + #{count_score}
+        WHERE id = #{data_id}
+    </update>
+
 
     <select id="infoPingfenGet" resultType="com.heycolor.yunziyuanbackend.DAOinfo.pingfenBean">
         SELECT * FROM user_pingfen

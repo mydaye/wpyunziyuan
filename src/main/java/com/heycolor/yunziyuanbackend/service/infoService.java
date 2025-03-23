@@ -30,7 +30,9 @@ public class infoService {
     public int infoLikeAdd(addLike bao) {
        return this.infomapper.infoLikeAdd(bao.getUser_number(),bao.getData_id());
     }
-
+    public int infoLikeCount(addLike bao) {
+        return this.infomapper.infoLikeCount(bao.getData_id());
+    }
     public int infoLikeDel(addLike bao) {
         return this.infomapper.infoLikeDel(bao.getUser_number(),bao.getData_id());
     }
@@ -39,7 +41,11 @@ public class infoService {
     }
 
     public int infoPingfenAdd(addPingfen bao) {
-        return this.infomapper.infoPingfenAdd(bao.getUser_number(),bao.getData_id(),bao.getCount_score());
+        int a =  this.infomapper.infoPingfenAdd(bao.getUser_number(),bao.getData_id(),bao.getCount_score());
+        if (a > 0) {
+            return this.infomapper.infoPingfenDataAdd(bao.getData_id(),bao.getCount_score());
+        }
+        return 0;
     }
 
     public List<pingfenBean> infoPingfenGet(addPingfen bao) {
