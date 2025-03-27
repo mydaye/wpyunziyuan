@@ -7,14 +7,16 @@ import java.util.Date;
 public class commentBean {
     private final int id;
     private final String user_number;
+    private final String user_name;
     private final String user_tx;
     private final int data_id;
     private final String comment;
     private final Date create_time;
 
-    public commentBean(int id, String user_number, String userTx, int data_id, String comment, Date create_time) {
+    public commentBean(int id, String user_number, String userName, String userTx, int data_id, String comment, Date create_time) {
         this.id = id;
         this.user_number = user_number;
+        this.user_name = userName;
         this.user_tx = userTx;
         this.data_id = data_id;
         this.comment = comment;
@@ -27,6 +29,10 @@ public class commentBean {
 
     public String getUser_number() {
         return user_number;
+    }
+
+    public String getUser_name() {
+        return user_name;
     }
 
     public String getUser_tx() {

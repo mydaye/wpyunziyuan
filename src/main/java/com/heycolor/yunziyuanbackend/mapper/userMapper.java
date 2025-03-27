@@ -17,4 +17,6 @@ public interface userMapper {
 
     int upUserInfo(String user_number, String user_psw, String user_name, String user_tx, String user_aihao);
     boolean userLoginKeyTest(String user_number, String user_login_key);
+
+    int upUserPsw(String user_number, String user_j_psw, String user_x_psw);
 }

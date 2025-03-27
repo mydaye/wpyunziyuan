@@ -1,6 +1,7 @@
 package com.heycolor.yunziyuanbackend.service;
 
 
+import com.heycolor.yunziyuanbackend.DAOuser.Request.upPswParams;
 import com.heycolor.yunziyuanbackend.mapper.userMapper;
 import com.heycolor.yunziyuanbackend.DAOuser.userBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,12 @@ public class userService {
     //更新用户信息
     public int upUserInfo(String user_number, String user_psw, String user_name, String user_tx, String user_aihao) {
        return this.usermapper.upUserInfo(user_number, user_psw, user_name, user_tx, user_aihao);
+    }
+
+    public int upUserPsw(upPswParams bao) {
+        if (bao.getUser_x_psw()!=null && !bao.getUser_x_psw().isEmpty()) {
+            return this.usermapper.upUserPsw(bao.getUser_number(), bao.getUser_j_psw(), bao.getUser_x_psw());
+        }
+        return 0;
     }
 }

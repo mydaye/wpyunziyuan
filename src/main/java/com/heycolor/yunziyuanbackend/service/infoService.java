@@ -53,7 +53,9 @@ public class infoService {
     }
 
     public int infoCollectionAdd(addCollection bao) {
-        return this.infomapper.infoCollectionAdd(bao.getUser_number(),bao.getData_id(),bao.getData_title(),bao.getData_img_list());
+        // 收藏时间
+        Date create_time = new Date();
+        return this.infomapper.infoCollectionAdd(bao.getUser_number(),bao.getData_id(),bao.getData_title(),bao.getData_img_list(),create_time);
     }
     public int infoCollectionDel(addCollection bao) {
         return this.infomapper.infoCollectionDel(bao.getUser_number(),bao.getData_id());
@@ -70,7 +72,7 @@ public class infoService {
     public int infoCommentAdd(addComment bao) {
         // 评论时间
         Date create_time = new Date();
-        return this.infomapper.infoCommentAdd(bao.getUser_number(),bao.getUser_tx(), bao.getData_id(),bao.getComment(),create_time);
+        return this.infomapper.infoCommentAdd(bao.getUser_number(), bao.getUser_name(), bao.getUser_tx(), bao.getData_id(), bao.getComment(), create_time);
     }
 
     public int infoCommentDel(addComment bao) {

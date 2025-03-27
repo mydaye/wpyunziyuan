@@ -58,6 +58,11 @@
         WHERE user_number = #{user_number}
     </update>
 
+    <update id="upUserPsw" >
+        UPDATE myuser
+        SET user_psw = #{user_x_psw}
+        WHERE user_number = #{user_number} AND user_psw =#{user_j_psw}
+    </update>
     <select id="userLoginKeyTest" resultType="boolean" >
         SELECT COUNT(*) > 0 FROM myuser WHERE user_number = #{user_number} AND user_login_key = #{user_login_key}
     </select>

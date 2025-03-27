@@ -2,6 +2,7 @@ package com.heycolor.yunziyuanbackend;
 
 import com.heycolor.yunziyuanbackend.DAOinfo.*;
 import com.heycolor.yunziyuanbackend.DAOinfo.Request.*;
+import com.heycolor.yunziyuanbackend.DAOuser.Request.getParams;
 import com.heycolor.yunziyuanbackend.constant.ReturnInfo;
 import com.heycolor.yunziyuanbackend.service.infoService;
 import com.heycolor.yunziyuanbackend.service.userService;
@@ -36,6 +37,29 @@ public class infoApI {
                 .body(ReturnInfo.res(NOT_LOGGED_IN, "", dbData));
 
     }
+    //返回指定ID数据
+    @PostMapping({"/getData/id"})
+    private ResponseEntity<ReturnInfo> userGetIdData(@Validated @RequestBody getParams bao) {
+        boolean uTest = xUser.userByLoginTest(bao.getUser_number(),bao.getUser_login_key());
+        if (!uTest) {
+            return ResponseEntity.badRequest()
+                    .body(ReturnInfo.res(KEY_ERROR, "请重新登陆", null));
+        }
+        List<infoBean> dbData = xInfo.selectInfo();
+        if (!dbData.isEmpty()) {
+            for (infoBean d : dbData) {
+                if (d.getId() == bao.getData_id()) {
+                    System.out.print("测"+bao.getData_id());
+                    return ResponseEntity.ok()
+                            .body(ReturnInfo.res(SUCCESS, "", d));
+                }
+            }
+        }
+        return ResponseEntity.ok()
+                .body(ReturnInfo.res(NOT_LOGGED_IN, "数据不存在", null));
+
+    }
+
     //用户点赞操作
     @PostMapping({"/user/like/addDelGet"})
     private ResponseEntity<ReturnInfo> userLikeAdd(@Validated @RequestBody addLike bao) {
@@ -182,12 +206,10 @@ public class infoApI {
                     .body(ReturnInfo.res(KEY_ERROR, "请重新登陆", null));
         }
         List<commentBean> dbData = xInfo.infoCommentGetAll(bao.getData_id());
-        if (!dbData.isEmpty()) {
             return ResponseEntity.ok()
                     .body(ReturnInfo.res(SUCCESS, "", dbData));
-        }
-        return ResponseEntity.ok()
-                .body(ReturnInfo.res(NOT_LOGGED_IN, "没有评论", null));
+
+
     }
 
     //单独增加一个资源  前端未用,后台用

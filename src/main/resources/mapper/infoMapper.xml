@@ -96,13 +96,15 @@
         (user_number,
          data_id,
          data_title,
-         data_img_list
+         data_img_list,
+         create_time
         )
         VALUES
             (#{user_number},
              #{data_id},
              #{data_title},
-             #{data_img_list}
+             #{data_img_list},
+             #{create_time}
             )
     </insert>
     <delete id="infoCollectionDel">
@@ -126,6 +128,7 @@
     <insert id="infoCommentAdd">
         INSERT INTO user_comment
         (user_number,
+         user_name,
          user_tx,
          data_id,
          comment,
@@ -133,6 +136,7 @@
         )
         VALUES
             (#{user_number},
+             #{user_name},
              #{user_tx},
              #{data_id},
              #{comment},

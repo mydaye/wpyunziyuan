@@ -1,5 +1,6 @@
 package com.heycolor.yunziyuanbackend;
 
+import com.heycolor.yunziyuanbackend.DAOuser.Request.upPswParams;
 import com.heycolor.yunziyuanbackend.constant.ReturnInfo;
 import com.heycolor.yunziyuanbackend.service.userService;
 import com.heycolor.yunziyuanbackend.DAOuser.Request.loginParams;
@@ -92,6 +93,22 @@ public class userApi {
         return ResponseEntity.ok()
                 .body(ReturnInfo.res(REQUEST_METHOD_ERROR, "请检查请求是否正确", null));
 
+    }
+
+    @PostMapping({"/upPsw"})
+    private ResponseEntity<ReturnInfo> userInfoToUpDate(@Validated @RequestBody upPswParams bao) {
+        boolean uTest = xUser.userByLoginTest(bao.getUser_number(), bao.getUser_login_key());
+        if (!uTest) {
+            return ResponseEntity.badRequest()
+                    .body(ReturnInfo.res(KEY_ERROR, "请重新登陆", null));
+        }
+        int r = xUser.upUserPsw(bao);
+        if (r > 0) {
+            return ResponseEntity.ok()
+                    .body(ReturnInfo.res(SUCCESS, "", null));
+        }
+        return ResponseEntity.badRequest()
+                .body(ReturnInfo.res(NOT_LOGGED_IN, "用户账号和旧密码不匹配", null));
     }
 
 
