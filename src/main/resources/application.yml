@@ -21,7 +21,7 @@ spring:
       max-request-size: 10MB
 file:
   tx-upload-dir: uploads/images/tx
-  data-upload-dir: uploads/images/tx
+  data-upload-dir: uploads/images/data
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 #type-aliases-package: com.gengdemo.mybatis.entity

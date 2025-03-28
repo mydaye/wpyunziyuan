@@ -36,6 +36,7 @@ SELECT         data_id as "key",
     <insert id="infoAdd">
         INSERT INTO mydata
         (data_title,
+         data_state,
          data_img_list,
          data_img_mx,
          data_url,
@@ -51,6 +52,7 @@ SELECT         data_id as "key",
         )
         VALUES
             (#{data_title},
+             #{data_state},
              #{data_img_list},
              #{data_img_mx},
              #{data_url},

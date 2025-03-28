@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class addParams {
     private final String data_title;
+    private final int data_state;
     private final String data_img_list;
     private final String data_img_mx;
     private final String data_url;
@@ -14,8 +15,9 @@ public class addParams {
     private final String data_year;
     private final String data_note;
 
-    public addParams(String data_title, String data_img_list, String data_img_mx, String data_url, boolean data_good, String data_dir, String data_type, String data_country, String data_year, String data_note) {
+    public addParams(String data_title, int dataState, String data_img_list, String data_img_mx, String data_url, boolean data_good, String data_dir, String data_type, String data_country, String data_year, String data_note) {
         this.data_title = data_title;
+        this.data_state = dataState;
         this.data_img_list = data_img_list;
         this.data_img_mx = data_img_mx;
         this.data_url = data_url;
@@ -29,6 +31,10 @@ public class addParams {
 
     public String getData_title() {
         return data_title;
+    }
+
+    public int getData_state() {
+        return data_state;
     }
 
     public String getData_img_list() {

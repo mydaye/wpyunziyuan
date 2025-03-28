@@ -224,6 +224,7 @@ public class infoApI {
                     .body(ReturnInfo.res(SUCCESS, "", dbData));
     }
 
+
     //单独增加一个资源  前端未用,后台用
     @PostMapping({"/add"})
     private ResponseEntity<ReturnInfo> infoToAdd(@Validated @RequestBody addParams bao) {
@@ -232,6 +233,7 @@ public class infoApI {
             Date addTime = new Date();
             int dbData = xInfo.infoAdd(new addBean(
                     bao.getData_title(),
+                    bao.getData_state(),
                     bao.getData_img_list(),
                     bao.getData_img_mx(),
                     bao.getData_url(),
