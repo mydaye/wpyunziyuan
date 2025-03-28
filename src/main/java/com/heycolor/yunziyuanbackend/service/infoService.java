@@ -4,13 +4,16 @@ package com.heycolor.yunziyuanbackend.service;
 import com.heycolor.yunziyuanbackend.DAOinfo.*;
 import com.heycolor.yunziyuanbackend.DAOinfo.Request.*;
 import com.heycolor.yunziyuanbackend.mapper.infoMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,11 +29,14 @@ public class infoService {
         return this.infomapper.selectInfo();
     }
 
-    public List<infoBean> selectInfoTrue() {
-        List<infoBean> infoBeans = infomapper.selectInfoTrue();
-        List<Integer> dataIdList = infoBeans.stream().map(infoBean::getId).collect(Collectors.toList());
-        Map<Integer,Integer> dataLikeMap = infomapper.selectUserLikeByDataIds(dataIdList);
-        Map<Integer,Integer> dataCommentMap = infomapper.selectUserCommentCountByDataIds(dataIdList);
+    public List<infoTrueBean> selectInfoTrue() {
+        List<infoTrueBean> infoBeans = infomapper.selectInfoTrue();
+        List<Integer> dataIdList = infoBeans.stream().map(infoTrueBean::getId).collect(Collectors.toList());
+        List<infoCountBean> dataLikeList = infomapper.selectUserLikeByDataIds(dataIdList);
+        List<infoCountBean> dataCommentList = infomapper.selectUserCommentCountByDataIds(dataIdList);
+        Map<Integer, Integer> dataLikeMap = dataLikeList.stream().collect(Collectors.toMap(infoCountBean::getK, infoCountBean::getCount));
+        Map<Integer, Integer> dataCommentMap = dataCommentList.stream().collect(Collectors.toMap(infoCountBean::getK, infoCountBean::getCount));
+
         if(!CollectionUtils.isEmpty(infoBeans))
             infoBeans.forEach(e->{
                 if(!CollectionUtils.isEmpty(dataLikeMap))

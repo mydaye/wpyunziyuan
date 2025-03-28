@@ -41,7 +41,7 @@ public class infoApI {
     //返回所有数据
     @GetMapping({"/getData/allTrue"})
     private ResponseEntity<ReturnInfo> userGetDataTrue() {
-        List<infoBean> dbData = xInfo.selectInfoTrue();
+        List<infoTrueBean> dbData = xInfo.selectInfoTrue();
         if (!dbData.isEmpty()) {
             return ResponseEntity.ok()
                     .body(ReturnInfo.res(SUCCESS, "", dbData));

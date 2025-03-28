@@ -2,7 +2,7 @@ package com.heycolor.yunziyuanbackend.DAOinfo;
 
 import java.util.Date;
 
-public class infoBean {
+public class infoTrueBean {
     private final int id;
     private final String data_title;
     private final int data_state;
@@ -18,8 +18,10 @@ public class infoBean {
     private final int count_people;
     private final int count_score;
     private final Date gmt_create;
+    private int dataLikeCount;
+    private int dataCommentCount;
 
-    public infoBean(int id, String data_title, int dataState, String data_img_list, String data_img_mx, String data_url, boolean data_good, String data_dir, String data_type, String data_country, String data_year, String data_note, int count_people, int count_score, Date gmt_create) {
+    public infoTrueBean(int id, String data_title, int dataState, String data_img_list, String data_img_mx, String data_url, boolean data_good, String data_dir, String data_type, String data_country, String data_year, String data_note, int count_people, int count_score, Date gmt_create, int dataLikeCount, int dataCommentCount) {
 
         this.id = id;
         this.data_title = data_title;
@@ -36,7 +38,8 @@ public class infoBean {
         this.count_people = count_people;
         this.count_score = count_score;
         this.gmt_create = gmt_create;
-
+        this.dataLikeCount = dataLikeCount;
+        this.dataCommentCount = dataCommentCount;
     }
 
     public int getId() {
@@ -99,4 +102,19 @@ public class infoBean {
         return gmt_create;
     }
 
+    public int getDataLikeCount() {
+        return dataLikeCount;
+    }
+
+    public int getDataCommentCount() {
+        return dataCommentCount;
+    }
+
+    public void setDataLikeCount(int dataLikeCount) {
+        this.dataLikeCount = dataLikeCount;
+    }
+
+    public void setDataCommentCount(int dataCommentCount) {
+        this.dataCommentCount = dataCommentCount;
+    }
 }

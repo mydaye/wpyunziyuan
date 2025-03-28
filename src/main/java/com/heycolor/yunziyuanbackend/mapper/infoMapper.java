@@ -41,9 +41,7 @@ public interface infoMapper {
     List<commentBean> infoCommentGetAll(int data_id);
 
 
-    List<infoBean> selectInfoTrue();
-    @MapKey("key")
-    Map<Integer, Integer> selectUserLikeByDataIds(@Param("list")List<Integer> dataIdList);
-    @MapKey("key")
-    Map<Integer, Integer> selectUserCommentCountByDataIds(@Param("list") List<Integer> dataIdList);
+    List<infoTrueBean> selectInfoTrue();
+    List<infoCountBean> selectUserLikeByDataIds(@Param("list")List<Integer> dataIdList);
+    List<infoCountBean> selectUserCommentCountByDataIds(@Param("list") List<Integer> dataIdList);
 }

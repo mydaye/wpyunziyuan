@@ -3,13 +3,15 @@
 
 <mapper namespace="com.heycolor.yunziyuanbackend.mapper.infoMapper">
     <select id="selectInfo" resultType="com.heycolor.yunziyuanbackend.DAOinfo.infoBean" >SELECT * FROM mydata</select>
-    <select id="selectInfoTrue" resultType="com.heycolor.yunziyuanbackend.DAOinfo.infoBean" >
-        SELECT * FROM mydata where data_good = 1
+    <select id="selectInfoTrue" resultType="com.heycolor.yunziyuanbackend.DAOinfo.infoTrueBean" >
+         select id as data_id, data_title,data_state, data_img_list, data_img_mx, data_url, data_good, data_dir, data_type, data_country,data_year, data_note,count_people,count_score,gmt_create,0 as dataLikeCount,0 as dataCommentCount from mydata m
+          where data_good = 1
     </select>
-    <select id="selectUserLikeByDataIds" resultType="com.heycolor.yunziyuanbackend.DAOinfo.infoBean" resultMap="countMap">
+
+    <select id="selectUserLikeByDataIds"  resultType="com.heycolor.yunziyuanbackend.DAOinfo.infoCountBean">
 select
-        data_id as "key",
-        count(1) as "value"
+        data_id as "k",
+        count(1) as "count"
 from user_like
         <where>
             data_id in
@@ -19,13 +21,9 @@ from user_like
         </where>
         group BY data_id
 </select>
-    <resultMap id="countMap" type="java.util.Map">
-        <result property="key" column="key"/>      <!-- 列别名 key 映射到 Map 键 -->
-        <result property="value" column="value"/>  <!-- 列别名 value 映射到 Map 值 -->
-    </resultMap>
-    <select id="selectUserCommentCountByDataIds" resultType="com.heycolor.yunziyuanbackend.DAOinfo.infoBean" resultMap="countMap">
-SELECT         data_id as "key",
-        count(1) as "value"   FROM mydata <where>
+    <select id="selectUserCommentCountByDataIds" resultType="com.heycolor.yunziyuanbackend.DAOinfo.infoCountBean">
+SELECT         data_id as "k",
+        count(1) as "count"   FROM user_comment <where>
     data_id in
         <foreach collection="list" separator="," item="item" open="(" close=")">
             #{item}
