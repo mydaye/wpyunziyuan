@@ -218,6 +218,7 @@ public class infoApI {
             Date addTime = new Date();
             int dbData = xInfo.infoAdd(new addBean(
                     bao.getData_title(),
+                    bao.getData_state(),
                     bao.getData_img_list(),
                     bao.getData_img_mx(),
                     bao.getData_url(),

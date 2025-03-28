@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class addBean {
     private final String data_title;
+    private final int data_state;
     private final String data_img_list;
     private final String data_img_mx;
     private final String data_url;
@@ -17,8 +18,9 @@ public class addBean {
     private final int count_score;
     private final Date gmt_create;
 
-    public addBean(String data_title, String data_img_list, String data_img_mx, String data_url, boolean data_good, String data_dir, String data_type, String data_country, String data_year, String data_note, int count_people, int count_score, Date gmt_create) {
+    public addBean(String data_title, int dataState, String data_img_list, String data_img_mx, String data_url, boolean data_good, String data_dir, String data_type, String data_country, String data_year, String data_note, int count_people, int count_score, Date gmt_create) {
         this.data_title = data_title;
+        this.data_state = dataState;
         this.data_img_list = data_img_list;
         this.data_img_mx = data_img_mx;
         this.data_url = data_url;
