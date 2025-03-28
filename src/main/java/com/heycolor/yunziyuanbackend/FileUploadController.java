@@ -25,7 +25,7 @@ public class FileUploadController {
     private static final List<String> ALLOWED_IMAGE_TYPES = Arrays.asList(
             "image/jpeg", "image/png", "image/gif", "image/jpg"
     );
-
+//推送测试
     @PostMapping("/tx")
     public ResponseEntity<ReturnInfo> uploadTxImage(@RequestParam("file") MultipartFile file,
                                                   @RequestParam("user_number") String user_number,
