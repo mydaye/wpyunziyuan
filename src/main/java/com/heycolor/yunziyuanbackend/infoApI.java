@@ -210,6 +210,7 @@ public class infoApI {
                     .body(ReturnInfo.res(SUCCESS, "", dbData));
     }
 
+
     //单独增加一个资源  前端未用,后台用
     @PostMapping({"/add"})
     private ResponseEntity<ReturnInfo> infoToAdd(@Validated @RequestBody addParams bao) {
