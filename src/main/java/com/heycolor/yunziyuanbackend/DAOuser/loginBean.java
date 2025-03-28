@@ -3,15 +3,17 @@ package com.heycolor.yunziyuanbackend.DAOuser;
 public class loginBean {
     private final String user_number;
     private final String user_name;
+    private final String user_type;
     private final String user_tx;
     private final int user_state;
     private final String user_aihao;
     private final int user_points;
     private final String user_login_key;
 
-    public loginBean(String user_number, String user_name, String user_tx, int user_state, String user_aihao, int user_points,String user_login_key) {
+    public loginBean(String user_number, String user_name, String userType, String user_tx, int user_state, String user_aihao, int user_points, String user_login_key) {
         this.user_number = user_number;
         this.user_name = user_name;
+        this.user_type = userType;
         this.user_tx = user_tx;
         this.user_state = user_state;
         this.user_aihao = user_aihao;
@@ -25,6 +27,10 @@ public class loginBean {
 
     public String getUser_name() {
         return user_name;
+    }
+
+    public String getUser_type() {
+        return user_type;
     }
 
     public String getUser_tx() {

@@ -41,6 +41,7 @@ public class userApi {
         loginBean userInfo = new loginBean(
                 dbData.getUser_number(),
                 dbData.getUser_name(),
+                dbData.getUser_type(),
                 dbData.getUser_tx(),
                 dbData.getUser_state(),
                 dbData.getUser_aihao(),
@@ -64,7 +65,7 @@ public class userApi {
 
         // 更新登陆时间
         Date mTime = new Date();
-        xUser.userByReg(bao.getUser_number(), bao.getUser_psw(), "还未设置名称","头像",1,"",0,"", mTime);
+        xUser.userByReg(bao.getUser_number(), bao.getUser_psw(), "还未设置名称",0, "头像",1,"",0,"", mTime);
         return ResponseEntity.ok()
                 .body(ReturnInfo.res(SUCCESS, "", null));
     }

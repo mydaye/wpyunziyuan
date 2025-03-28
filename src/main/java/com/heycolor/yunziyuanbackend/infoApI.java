@@ -208,8 +208,6 @@ public class infoApI {
         List<commentBean> dbData = xInfo.infoCommentGetAll(bao.getData_id());
             return ResponseEntity.ok()
                     .body(ReturnInfo.res(SUCCESS, "", dbData));
-
-
     }
 
     //单独增加一个资源  前端未用,后台用

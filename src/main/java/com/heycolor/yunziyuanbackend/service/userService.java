@@ -31,8 +31,8 @@ public class userService {
         return false;
     }
 
-    public void userByReg(String user_number, String user_psw, String user_name, String user_tx, int user_state, String user_aihao, int user_points, String user_login_key, Date user_login_time) {
-        this.usermapper.userReg(user_number, user_psw, user_name, user_tx, user_state, user_aihao, user_points, user_login_key, user_login_time);
+    public void userByReg(String user_number, String user_psw, String user_name,int user_type, String user_tx, int user_state, String user_aihao, int user_points, String user_login_key, Date user_login_time) {
+        this.usermapper.userReg(user_number, user_psw, user_name,user_type, user_tx, user_state, user_aihao, user_points, user_login_key, user_login_time);
     }
     public userBean userByLogin(String user_number, String user_psw) {
         return this.usermapper.userLogin(user_number, user_psw);
