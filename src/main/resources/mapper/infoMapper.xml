@@ -3,6 +3,36 @@
 
 <mapper namespace="com.heycolor.yunziyuanbackend.mapper.infoMapper">
     <select id="selectInfo" resultType="com.heycolor.yunziyuanbackend.DAOinfo.infoBean" >SELECT * FROM mydata</select>
+    <select id="selectInfoTrue" resultType="com.heycolor.yunziyuanbackend.DAOinfo.infoBean" >
+        SELECT * FROM mydata where data_good = 1
+    </select>
+    <select id="selectUserLikeByDataIds" resultType="com.heycolor.yunziyuanbackend.DAOinfo.infoBean" resultMap="countMap">
+select
+        data_id as "key",
+        count(1) as "value"
+from user_like
+        <where>
+            data_id in
+            <foreach collection="list" separator="," item="item" open="(" close=")">
+                #{item}
+            </foreach>
+        </where>
+        group BY data_id
+</select>
+    <resultMap id="countMap" type="java.util.Map">
+        <result property="key" column="key"/>      <!-- 列别名 key 映射到 Map 键 -->
+        <result property="value" column="value"/>  <!-- 列别名 value 映射到 Map 值 -->
+    </resultMap>
+    <select id="selectUserCommentCountByDataIds" resultType="com.heycolor.yunziyuanbackend.DAOinfo.infoBean" resultMap="countMap">
+SELECT         data_id as "key",
+        count(1) as "value"   FROM mydata <where>
+    data_id in
+        <foreach collection="list" separator="," item="item" open="(" close=")">
+            #{item}
+        </foreach>
+    </where> group BY data_id
+
+</select>
     <insert id="infoAdd">
         INSERT INTO mydata
         (data_title,

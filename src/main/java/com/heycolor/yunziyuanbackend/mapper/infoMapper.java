@@ -1,10 +1,13 @@
 package com.heycolor.yunziyuanbackend.mapper;
 
 import com.heycolor.yunziyuanbackend.DAOinfo.*;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface infoMapper {
@@ -38,4 +41,9 @@ public interface infoMapper {
     List<commentBean> infoCommentGetAll(int data_id);
 
 
+    List<infoBean> selectInfoTrue();
+    @MapKey("key")
+    Map<Integer, Integer> selectUserLikeByDataIds(@Param("list")List<Integer> dataIdList);
+    @MapKey("key")
+    Map<Integer, Integer> selectUserCommentCountByDataIds(@Param("list") List<Integer> dataIdList);
 }

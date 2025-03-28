@@ -6,9 +6,12 @@ import com.heycolor.yunziyuanbackend.DAOinfo.Request.*;
 import com.heycolor.yunziyuanbackend.mapper.infoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class infoService {
@@ -21,6 +24,21 @@ public class infoService {
 
     public List<infoBean> selectInfo() {
         return this.infomapper.selectInfo();
+    }
+
+    public List<infoBean> selectInfoTrue() {
+        List<infoBean> infoBeans = infomapper.selectInfoTrue();
+        List<Integer> dataIdList = infoBeans.stream().map(infoBean::getId).collect(Collectors.toList());
+        Map<Integer,Integer> dataLikeMap = infomapper.selectUserLikeByDataIds(dataIdList);
+        Map<Integer,Integer> dataCommentMap = infomapper.selectUserCommentCountByDataIds(dataIdList);
+        if(!CollectionUtils.isEmpty(infoBeans))
+            infoBeans.forEach(e->{
+                if(!CollectionUtils.isEmpty(dataLikeMap))
+                    e.setDataCommentCount(dataCommentMap.getOrDefault(e.getId(),0));
+                if(!CollectionUtils.isEmpty(dataLikeMap))
+                    e.setDataLikeCount(dataLikeMap.getOrDefault(e.getId(),0));
+            });
+        return infoBeans;
     }
 
     public int infoAdd(addBean info) {
