@@ -35,6 +35,11 @@ public class userApi {
             return ResponseEntity.badRequest()
                     .body(ReturnInfo.res(FAILED, "用户不存在或密码错误", null));
         }
+
+        if ("管理员".equals(bao.getUser_type()) && !dbData.getUser_type().equals("1")) {
+            return ResponseEntity.badRequest().body(ReturnInfo.res(FAILED, "非管理员用户", null));
+        }
+
         //生成登陆关键词
         String user_login_key = generateRandomKey(16);
         // 登录成功，返回用户信息
@@ -55,6 +60,22 @@ public class userApi {
         return ResponseEntity.ok()
                 .body(ReturnInfo.res(SUCCESS, "", userInfo));
     }
+
+    @PostMapping({"/userManagerAdd"})
+    private ResponseEntity<ReturnInfo> userManagerAdd(@Validated @RequestBody loginParams bao) {
+        boolean uTest = xUser.userByTest(bao.getUser_number());
+        if (uTest) {
+            return ResponseEntity.badRequest()
+                    .body(ReturnInfo.res(NOT_LOGGED_IN, "用户账号已存在", null));
+        }
+
+        // 更新登陆时间
+        Date mTime = new Date();
+        xUser.userByReg(bao.getUser_number(), bao.getUser_psw(), "还未设置名称",1, "头像",1,"",0,"", mTime);
+        return ResponseEntity.ok()
+                .body(ReturnInfo.res(SUCCESS, "", null));
+    }
+
     @PostMapping({"/userReg"})
     private ResponseEntity<ReturnInfo> userToReg(@Validated @RequestBody loginParams bao) {
         boolean uTest = xUser.userByTest(bao.getUser_number());

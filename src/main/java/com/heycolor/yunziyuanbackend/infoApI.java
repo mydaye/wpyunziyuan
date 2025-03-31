@@ -37,6 +37,20 @@ public class infoApI {
                 .body(ReturnInfo.res(NOT_LOGGED_IN, "", dbData));
 
     }
+
+    //返回所有数据
+    @GetMapping({"/getData/allTrue"})
+    private ResponseEntity<ReturnInfo> userGetDataTrue() {
+        List<infoTrueBean> dbData = xInfo.selectInfoTrue();
+        if (!dbData.isEmpty()) {
+            return ResponseEntity.ok()
+                    .body(ReturnInfo.res(SUCCESS, "", dbData));
+        }
+        return ResponseEntity.ok()
+                .body(ReturnInfo.res(NOT_LOGGED_IN, "", dbData));
+
+    }
+
     //返回指定ID数据
     @PostMapping({"/getData/id"})
     private ResponseEntity<ReturnInfo> userGetIdData(@Validated @RequestBody getParams bao) {
