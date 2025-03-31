@@ -1,36 +1,4 @@
-server:
-  port: 444
+#application.yml
 spring:
-  jackson:
-    time-zone: Asia/Shanghai
-    date-format: yyyy-MM-dd HH:mm:ss
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://39.106.6.115:3306/yunziyuan?characterEncoding=utf-8&useSsL=false&serverTimezone=UTC&serverTimezone =Asia/Shanghai
-    username: yunziyuan
-    password: J4mEtJ3FKtSKjnMx
-    hikari:
-      max-lifetime: 1800000  # 设置为 30 分钟（比 MySQL 默认空闲超时时间短）
-      connection-test-query: SELECT 1
-      leak-detection-threshold: 2100 # 2秒检测连接泄露
-      connection-timeout: 30000  # 30秒的连接超时
-      idle-timeout: 600000  # 10分钟的空闲超时
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
-file:
-  tx-upload-dir: uploads/images/tx
-  data-upload-dir: uploads/images/data
-mybatis:
-  mapper-locations: classpath:mapper/*.xml
-#type-aliases-package: com.gengdemo.mybatis.entity
-  #配置sql打印日志
-  configuration:
-    auto-mapping-behavior: full
-    map-underscore-to-camel-case: false
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
-
-
-
+  profiles:
+    active: dev
