@@ -20,4 +20,10 @@ public interface ManageMapper {
     int deleteResource(ManageVO vo);
 
     int updateResource(ManageVO vo);
+
+    int restUserPassword(ManageVO vo);
+
+    List<ManagerRe> getUserReList(ManageVO vo);
+
+    int updateUser(ManageVO vo);
 }

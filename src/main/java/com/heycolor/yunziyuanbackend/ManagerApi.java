@@ -1,5 +1,7 @@
 package com.heycolor.yunziyuanbackend;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.heycolor.yunziyuanbackend.DAOManage.ManageVO;
 import com.heycolor.yunziyuanbackend.DAOManage.ManagerRe;
 import com.heycolor.yunziyuanbackend.constant.ReturnInfo;
@@ -28,12 +30,13 @@ public class ManagerApi {
     private ResponseEntity<ReturnInfo> managerOperate(@Validated @RequestBody ManageVO vo) {
         Object re = null;
         String operate = vo.getOperate();
-        if ("q".equals(operate)) {
-            re = manageMapper.getManagerReList(vo);
-        }else if ("d".equals(operate)) {
+        if ("query".equals(operate)) {
+            PageHelper.startPage(vo.getPageIndex(), vo.getPageSize());
+            re = new PageInfo<>(manageMapper.getManagerReList(vo));
+        }else if ("delete".equals(operate)) {
             re = manageMapper.deleteManager(vo) > 0 ? "操作成功":"操作失败";
-        } else if ("h".equals(operate)) {
-            //恢复密码
+        } else if ("huifu".equals(operate)) {
+            re = manageMapper.restUserPassword(vo) > 0 ? "操作成功":"操作失败";
         }
         return ResponseEntity.ok()
                 .body(ReturnInfo.res(SUCCESS, "", re));
@@ -43,13 +46,14 @@ public class ManagerApi {
     private ResponseEntity<ReturnInfo> resourceOperate(@Validated @RequestBody ManageVO vo) {
         Object re = null;
         String operate = vo.getOperate();
-        if ("q".equals(operate)) {
-            re = manageMapper.getResourceeList(vo);
-        } else if ("a".equals(operate)) {
+        if ("query".equals(operate)) {
+            PageHelper.startPage(vo.getPageIndex(), vo.getPageSize());
+            re = new PageInfo<>(manageMapper.getResourceeList(vo));
+        } else if ("add".equals(operate)) {
             re = manageMapper.addResource(vo) > 0 ? "操作成功":"操作失败";
-        } else if ("d".equals(operate)) {
+        } else if ("delete".equals(operate)) {
             re = manageMapper.deleteResource(vo) > 0 ? "操作成功":"操作失败";
-        } else if ("u".equals(operate)) {
+        } else if ("update".equals(operate)) {
             re = manageMapper.updateResource(vo) > 0 ? "操作成功":"操作失败";
         }
         return ResponseEntity.ok()
@@ -60,12 +64,13 @@ public class ManagerApi {
     private ResponseEntity<ReturnInfo> userOperate(@Validated @RequestBody ManageVO vo) {
         Object re = null;
         String operate = vo.getOperate();
-        if ("q".equals(operate)) {
-            re = manageMapper.getManagerReList(vo);
-        } else if ("u".equals(operate)) {
-            re = manageMapper.getResourceeList(vo);
-        } else if ("h".equals(operate)) {
-            //恢复密码
+        if ("query".equals(operate)) {
+            PageHelper.startPage(vo.getPageIndex(), vo.getPageSize());
+            re = new PageInfo<>(manageMapper.getUserReList(vo));
+        } else if ("update".equals(operate)) {
+            re = manageMapper.updateUser(vo) > 0 ? "操作成功":"操作失败";
+        } else if ("huifu".equals(operate)) {
+            re = manageMapper.restUserPassword(vo) > 0 ? "操作成功":"操作失败";
         }
         return ResponseEntity.ok()
                 .body(ReturnInfo.res(SUCCESS, "", re));

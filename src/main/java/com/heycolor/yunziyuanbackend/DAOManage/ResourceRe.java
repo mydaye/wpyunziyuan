@@ -1,7 +1,10 @@
 package com.heycolor.yunziyuanbackend.DAOManage;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class ResourceRe {
     private Integer id;
     private String data_title;

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.heycolor.yunziyuanbackend.mapper.ManageMapper">
+    <update id="updateUser">
+
+    </update>
+
+    <select id="getUserReList">
+        select * from myuser where user_type = 0
+    </select>
+
+    <insert id="addResource">
+
+    </insert>
+
+    <update id="updateResource">
+    </update>
+
+    <delete id="deleteResource">
+        delete from mydata where id = #{dataId}
+    </delete>
+
+    <select id="getResourceeList" resultType="com.heycolor.yunziyuanbackend.DAOManage.ResourceRe">
+        select * from mydata order by id desc
+    </select>
+
+   <select id="getManagerReList" resultType="com.heycolor.yunziyuanbackend.DAOManage.ManagerRe">
+        select * from myuser where user_type = 1
+   </select>
+
+    <delete id="deleteManager">
+        delete from myuser where id = #{id} and id != #{operateId}
+    </delete>
+
+    <update id="restUserPassword">
+        update myuser set user_psw = #{user_psw} where id  = #{id} and id != #{operateId}
+    </update>
+
+</mapper>
