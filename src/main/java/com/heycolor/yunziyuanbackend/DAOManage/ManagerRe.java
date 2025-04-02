@@ -7,7 +7,7 @@ import java.util.Date;
 @Data
 public class ManagerRe {
     private Integer id;
-    private Integer user_number;
+    private Long user_number;
     private String user_psw;
     private String user_name;
     private Integer user_type;
