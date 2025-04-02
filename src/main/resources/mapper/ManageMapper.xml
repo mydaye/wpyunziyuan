@@ -3,7 +3,7 @@
 
 <mapper namespace="com.heycolor.yunziyuanbackend.mapper.ManageMapper">
     <update id="updateUser">
-
+        update myuser set user_state = #{userState} where id = #{id}
     </update>
 
     <select id="getUserReList">
@@ -11,10 +11,25 @@
     </select>
 
     <insert id="addResource">
-
+        insert into mydata (data_title, data_state, data_img_list, data_img_mx, data_url, data_good, data_dir, data_type, data_country, data_year, data_note, count_people, count_score, gmt_create)
+        VALUES (#{dataTitle},#{dataState},#{dataImgList},#{dataImgMx},#{dataUrl},#{dataGood},#{dataDir},#{dataType},#{dataCountry},#{dataYear},#{dataNote},#{countPeople},#{countScore},#{gmtCreate})
     </insert>
 
     <update id="updateResource">
+        update mydata set
+            data_title = #{data_title},
+            data_state = #{data_state},
+            data_img_list = #{data_img_list},
+            data_img_mx = #{data_img_mx},
+            data_url = #{data_url},
+            data_state = #{data_state},
+            data_dir = #{data_dir},
+            data_type = #{data_type},
+            data_country = #{data_country},
+            data_year = #{data_year},
+            data_note = #{data_note},
+            count_score = #{count_score},
+            count_people = #{count_people} where id = #{dataId}
     </update>
 
     <delete id="deleteResource">

@@ -2,6 +2,8 @@ package com.heycolor.yunziyuanbackend.DAOManage;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class ManageVO {
     private int operateId;
@@ -21,4 +23,21 @@ public class ManageVO {
     private int pageIndex;
 
     private int dataId;
+
+    private int userSate;
+
+    private String dataTitle;
+    private int dataState;
+    private String dataImgList;
+    private String dataImgMx;
+    private String dataUrl;
+    private int dataGood;
+    private String dataDir;
+    private String dataType;
+    private String dataCountry;
+    private String dataYear;
+    private String dataNote;
+    private int countPeople;
+    private int countScore;
+    private Date gmtCreate;
 }
