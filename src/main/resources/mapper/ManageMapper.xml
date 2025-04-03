@@ -3,11 +3,23 @@
 
 <mapper namespace="com.heycolor.yunziyuanbackend.mapper.ManageMapper">
     <update id="updateUser">
-        update myuser set user_state = #{userState} where id = #{id}
+        update myuser
+        <set>
+            <if test="user_state != null and user_state != ''">
+                user_state = #{user_state},
+            </if>
+            <if test="user_type != null and user_type != ''">
+                user_type = #{user_type},
+            </if>
+        </set>
+        where user_number = #{user_number}
     </update>
 
     <select id="getUserReList">
         select * from myuser where user_type = 0
+        <if test="searchField != null and searchField != '' and searchValue != null and searchValue != ''">
+            and ${searchField} LIKE CONCAT('%', #{searchValue}, '%')
+        </if>
     </select>
 
     <insert id="addResource">
@@ -17,19 +29,19 @@
 
     <update id="updateResource">
         update mydata set
-            data_title = #{data_title},
-            data_state = #{data_state},
-            data_img_list = #{data_img_list},
-            data_img_mx = #{data_img_mx},
-            data_url = #{data_url},
-            data_state = #{data_state},
-            data_dir = #{data_dir},
-            data_type = #{data_type},
-            data_country = #{data_country},
-            data_year = #{data_year},
-            data_note = #{data_note},
-            count_score = #{count_score},
-            count_people = #{count_people} where id = #{dataId}
+            data_title = #{dataTitle},
+            data_state = #{dataState},
+            data_img_list = #{dataImgList},
+            data_img_mx = #{dataImgMx},
+            data_url = #{dataUrl},
+            data_good = #{dataGood},
+            data_dir = #{dataDir},
+            data_type = #{dataType},
+            data_country = #{dataCountry},
+            data_year = #{dataYear},
+            data_note = #{dataNote},
+            count_score = #{countPeople},
+            count_people = #{countPeople} where id = #{id}
     </update>
 
     <delete id="deleteResource">
@@ -37,11 +49,18 @@
     </delete>
 
     <select id="getResourceeList" resultType="com.heycolor.yunziyuanbackend.DAOManage.ResourceRe">
-        select * from mydata order by id desc
+        select * from mydata
+        <if test="searchField != null and searchField != '' and searchValue != null and searchValue != ''">
+            where ${searchField} LIKE CONCAT('%', #{searchValue}, '%')
+        </if>
+        order by id desc
     </select>
 
    <select id="getManagerReList" resultType="com.heycolor.yunziyuanbackend.DAOManage.ManagerRe">
-        select * from myuser where user_type = 1
+       select * from myuser where user_type = 1
+       <if test="searchField != null and searchField != '' and searchValue != null and searchValue != ''">
+           and ${searchField} LIKE CONCAT('%', #{searchValue}, '%')
+       </if>
    </select>
 
     <delete id="deleteManager">

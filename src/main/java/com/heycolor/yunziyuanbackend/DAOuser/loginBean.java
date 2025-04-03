@@ -5,12 +5,12 @@ public class loginBean {
     private final String user_name;
     private final String user_type;
     private final String user_tx;
-    private final int user_state;
+    private final Integer user_state;
     private final String user_aihao;
-    private final int user_points;
+    private final Integer user_points;
     private final String user_login_key;
 
-    public loginBean(String user_number, String user_name, String userType, String user_tx, int user_state, String user_aihao, int user_points, String user_login_key) {
+    public loginBean(String user_number, String user_name, String userType, String user_tx, Integer user_state, String user_aihao, Integer user_points, String user_login_key) {
         this.user_number = user_number;
         this.user_name = user_name;
         this.user_type = userType;
@@ -37,7 +37,7 @@ public class loginBean {
         return user_tx;
     }
 
-    public int getUser_state() {
+    public Integer getUser_state() {
         return user_state;
     }
 
@@ -45,7 +45,7 @@ public class loginBean {
         return user_aihao;
     }
 
-    public int getUser_points() {
+    public Integer getUser_points() {
         return user_points;
     }
 

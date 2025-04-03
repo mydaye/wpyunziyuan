@@ -1,19 +1,19 @@
 package com.heycolor.yunziyuanbackend.DAOuser;
 
 public class userBean {
-    private final int id;
+    private final Integer id;
     private final String user_number;
     private final String user_psw;
     private final String user_name;
     private final String user_type;
     private final String user_tx;
-    private final int user_state;
+    private final Integer user_state;
     private final String user_aihao;
-    private final int user_points;
+    private final Integer user_points;
     private final String user_login_key;
     private final String user_login_time;
 
-    public userBean(int id, String user_number, String user_psw, String user_name, String userType, String user_tx, int user_state, String user_aihao, int user_points, String userLoginKey, String user_login_time) {
+    public userBean(Integer id, String user_number, String user_psw, String user_name, String userType, String user_tx, Integer user_state, String user_aihao, Integer user_points, String userLoginKey, String user_login_time) {
         this.id = id;
         this.user_number = user_number;
         this.user_psw = user_psw;
@@ -27,7 +27,7 @@ public class userBean {
         this.user_login_time = user_login_time;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -51,7 +51,7 @@ public class userBean {
         return user_tx;
     }
 
-    public int getUser_state() {
+    public Integer getUser_state() {
         return user_state;
     }
 
@@ -59,7 +59,7 @@ public class userBean {
         return user_aihao;
     }
 
-    public int getUser_points() {
+    public Integer getUser_points() {
         return user_points;
     }
 

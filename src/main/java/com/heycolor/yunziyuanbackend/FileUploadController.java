@@ -63,7 +63,7 @@ public class FileUploadController {
             }
             // 保存文件并获取文件名
             String fileName = fileStorageService.storeDataFile(file);
-            return ResponseEntity.badRequest()
+            return ResponseEntity.ok()
                     .body(ReturnInfo.res(SUCCESS, "", fileName));
 
         } catch (Exception e) {

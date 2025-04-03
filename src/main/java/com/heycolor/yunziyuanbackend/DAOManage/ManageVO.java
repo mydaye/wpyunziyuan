@@ -16,11 +16,17 @@ public class ManageVO {
 
     private String user_type;
 
+    private String user_state;
+
     private String operate;
 
     private int pageSize;
 
     private int pageIndex;
+
+    private String searchField;
+
+    private String searchValue;
 
     private int dataId;
 
