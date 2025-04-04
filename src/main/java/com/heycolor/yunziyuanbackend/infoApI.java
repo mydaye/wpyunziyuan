@@ -134,7 +134,7 @@ public class infoApI {
                 return ResponseEntity.ok()
                         .body(ReturnInfo.res(SUCCESS, "", null));
             }
-            pingfenBean bean = rData.getFirst();
+            pingfenBean bean = rData.get(0);
             return ResponseEntity.ok()
                     .body(ReturnInfo.res(SUCCESS, "", bean));
         }
