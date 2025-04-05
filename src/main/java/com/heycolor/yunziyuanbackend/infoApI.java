@@ -202,7 +202,7 @@ public class infoApI {
         }else if (bao.getType().equals("del")){
             dbData = xInfo.infoCommentDel(bao);
         }
-        if (dbData >0 ) {
+        if (dbData > 0 ) {
             return ResponseEntity.ok()
                     .body(ReturnInfo.res(SUCCESS, "", null));
         }

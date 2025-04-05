@@ -1,10 +1,9 @@
 package com.heycolor.yunziyuanbackend;
 
-import com.heycolor.yunziyuanbackend.DAOuser.Request.upPswParams;
+import com.heycolor.yunziyuanbackend.DAOuser.Request.*;
+import com.heycolor.yunziyuanbackend.DAOuser.qianDaoBean;
 import com.heycolor.yunziyuanbackend.constant.ReturnInfo;
 import com.heycolor.yunziyuanbackend.service.userService;
-import com.heycolor.yunziyuanbackend.DAOuser.Request.loginParams;
-import com.heycolor.yunziyuanbackend.DAOuser.Request.upInfoParams;
 import com.heycolor.yunziyuanbackend.DAOuser.loginBean;
 import com.heycolor.yunziyuanbackend.DAOuser.userBean;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Random;
 
@@ -133,7 +135,62 @@ public class userApi {
                 .body(ReturnInfo.res(NOT_LOGGED_IN, "用户账号和旧密码不匹配", null));
     }
 
+    @PostMapping({"/getQianDaoInfo"})
+    private ResponseEntity<ReturnInfo> userGetQianDao(@Validated @RequestBody getParams bao) {
+        boolean uTest = xUser.userByLoginTest(bao.getUser_number(), bao.getUser_login_key());
+        if (!uTest) {
+            return ResponseEntity.badRequest()
+                    .body(ReturnInfo.res(KEY_ERROR, "请重新登陆", null));
+        }
+        qianDaoBean bean = xUser.getUserQianDao(bao.getUser_number());
+        return ResponseEntity.ok()
+                .body(ReturnInfo.res(SUCCESS, "", bean));
 
+    }
+    @PostMapping({"/upQianDaoInfo"})
+    private ResponseEntity<ReturnInfo> userUpQianDao(@Validated @RequestBody getParams bao) {
+        boolean uTest = xUser.userByLoginTest(bao.getUser_number(), bao.getUser_login_key());
+        if (!uTest) {
+            return ResponseEntity.badRequest()
+                    .body(ReturnInfo.res(KEY_ERROR, "请重新登陆", null));
+        }
+        qianDaoBean bean = xUser.upUserQianDao(bao.getUser_number());
+        if (bean != null) {
+            return ResponseEntity.ok()
+                    .body(ReturnInfo.res(SUCCESS, "", bean));
+        }
+        return ResponseEntity.badRequest()
+                .body(ReturnInfo.res(NOT_LOGGED_IN, "用户签到失败", null));
+    }
+
+
+    @PostMapping({"/getUserPoints"})
+    private ResponseEntity<ReturnInfo> getUserPoints(@Validated @RequestBody getParams bao) {
+        boolean uTest = xUser.userByLoginTest(bao.getUser_number(), bao.getUser_login_key());
+        if (!uTest) {
+            return ResponseEntity.badRequest()
+                    .body(ReturnInfo.res(KEY_ERROR, "请重新登陆", null));
+        }
+        int points = xUser.getUserPoints(bao.getUser_number());
+        return ResponseEntity.ok()
+                .body(ReturnInfo.res(SUCCESS, "", points));
+    }
+
+    @PostMapping({"/addUserPoints"})
+    private ResponseEntity<ReturnInfo> addUserPoints(@Validated @RequestBody getParams bao) {
+        boolean uTest = xUser.userByLoginTest(bao.getUser_number(), bao.getUser_login_key());
+        if (!uTest) {
+            return ResponseEntity.badRequest()
+                    .body(ReturnInfo.res(KEY_ERROR, "请重新登陆", null));
+        }
+        int points = xUser.addUserPoints(bao.getUser_number(), 5); //固定加5分
+        if (points > 0) {
+            return ResponseEntity.ok()
+                    .body(ReturnInfo.res(SUCCESS, "", null));
+        }
+        return ResponseEntity.badRequest()
+                .body(ReturnInfo.res(NOT_LOGGED_IN, "用户评分奖励增失败", null));
+    }
 
     // 定义字符池（字母和数字）
     private static final String CHAR_POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

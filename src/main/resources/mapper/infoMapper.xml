@@ -182,7 +182,6 @@ SELECT         data_id as "k",
     <delete id="infoCommentDel">
         DELETE FROM user_comment
         WHERE id = #{id}
-          AND user_number = #{user_number}
     </delete>
 
 </mapper>

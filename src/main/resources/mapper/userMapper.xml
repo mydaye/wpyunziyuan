@@ -34,7 +34,9 @@
         SELECT * FROM myuser WHERE user_number = #{user_number} And user_psw = #{user_psw}
     </select>
 
-
+    <select id="getUserPoints" >
+        SELECT user_points FROM myuser WHERE user_number = #{user_number}
+    </select>
 
     <select id="userTest" resultType="boolean" >
         SELECT COUNT(*) > 0 FROM myuser WHERE user_number = #{user_number}
@@ -60,6 +62,10 @@
         WHERE user_number = #{user_number}
     </update>
 
+    <update id="upUserPoints" >
+        UPDATE myuser SET user_points = user_points + #{user_points}
+        WHERE user_number = #{user_number}
+    </update>
     <update id="upUserPsw" >
         UPDATE myuser
         SET user_psw = #{user_x_psw}
@@ -69,4 +75,17 @@
         SELECT COUNT(*) > 0 FROM myuser WHERE user_number = #{user_number} AND user_login_key = #{user_login_key}
     </select>
 
+    <select id="getUserQianDao" resultType="com.heycolor.yunziyuanbackend.DAOuser.qianDaoBean">
+        SELECT * FROM user_qiandao WHERE user_number = #{user_number}
+    </select>
+
+    <insert id="insertQianDao">
+        INSERT INTO user_qiandao (user_number, cont_timer, qiandao_time)
+        VALUES (#{user_number}, #{cont_timer}, #{qiandao_time});
+    </insert>
+    <update id="upUserQianDao" >
+        UPDATE user_qiandao
+        SET cont_timer = #{cont_timer}, qiandao_time = #{qiandao_time}
+            WHERE id = #{id}
+    </update>
 </mapper>

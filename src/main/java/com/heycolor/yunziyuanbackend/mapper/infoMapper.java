@@ -37,7 +37,7 @@ public interface infoMapper {
     int infoCommentAdd(String user_number,String user_name, String user_tx,
                        int data_id, String comment, Date create_time);
     //用户评论删除
-    int infoCommentDel(int id,String user_number);
+    int infoCommentDel(int id);
     List<commentBean> infoCommentGetAll(int data_id);
 
 

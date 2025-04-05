@@ -100,7 +100,7 @@ public class infoService {
     }
 
     public int infoCommentDel(addComment bao) {
-        return this.infomapper.infoCommentDel(bao.getId(),bao.getUser_number());
+        return this.infomapper.infoCommentDel(bao.getId());
     }
     //查找指定data的所有评价
     public List<commentBean> infoCommentGetAll(int data_id) {

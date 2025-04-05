@@ -1,6 +1,7 @@
 package com.heycolor.yunziyuanbackend.mapper;
 
 
+import com.heycolor.yunziyuanbackend.DAOuser.qianDaoBean;
 import com.heycolor.yunziyuanbackend.DAOuser.userBean;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,4 +20,13 @@ public interface userMapper {
     boolean userLoginKeyTest(String user_number, String user_login_key);
 
     int upUserPsw(String user_number, String user_j_psw, String user_x_psw);
+
+    qianDaoBean getUserQianDao(String user_number);
+
+    void insertQianDao(String user_number, int cont_timer, Date qiandao_time);
+
+    void upUserQianDao(int id, String user_number, int cont_timer, Date qiandao_time);
+    int upUserPoints(String user_number, int user_points);
+    int getUserPoints(String user_number);
+
 }
